@@ -1,45 +1,54 @@
-# MYSL Object Detection Android App
+# MYSL - Object Detection Model & Android App
 
-This repository provides an object detection model along with an Android app to run the model on your device. Follow the steps below to train, export, and integrate your object detection model into the app.
+This repository contains instructions for training and exporting an object detection model, as well as setting up an Android app that uses the trained model.
 
-## Step 1: Train and Export the Object Detection Model
+---
 
-1. Clone the repository:
+## Step 1: Train and Export Object Detection Model
+
+1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/KoukiFTW/MYSL
-Follow the instructions in the repository to train and export your object detection model.
-Step 2: Set Up the Object Detection Android App
-Open the android_app folder in the project directory.
 
-Add Your Model Files:
+## Step 2: Object Detection Android App Setup
 
-Place your .tflite model and the .txt label file inside the assets folder. The path to the assets folder is:
-android_app/android_app/app/src/main/assets
-Update File Paths:
+1. **Prepare the Assets**
 
-Open the Constants.kt file, located at:
-android_app/android_app/app/src/main/java/com/surendramaran/yolov8tflite
-Modify the file paths to point to your model and label files inside the assets folder.
-Step 3: Install Android Studio
-Download and install Android Studio from the official website:
-Download Android Studio
+   - Navigate to the `android_app` folder:
+   
+     ```
+     android_app/
+     ```
 
-After installation, launch Android Studio.
+   - Place your `.tflite` model and `.txt` label file inside the `assets` folder. The folder location is:
+   
+     ```
+     android_app/android_app/app/src/main/assets/
+     ```
 
-On the welcome screen, select "Open an existing Android Studio project".
+2. **Modify the Constants.kt File**
 
-Navigate to the root directory of your cloned project and select the folder.
+   - Open the `Constants.kt` file located at:
+   
+     ```
+     android_app/android_app/app/src/main/java/com/surendramaran/yolov8tflite
+     ```
 
-Step 4: Build and Run the App
-Once the project is loaded, build the project by clicking on Build > Make Project from the top menu.
+   - Update the paths for your model and label files inside the `Constants.kt` file to match the location of your `.tflite` model and `.txt` label file in the `assets` folder.
 
-Connect your Android device via USB or use an emulator to run the app.
+3. **Set Up Android Studio**
 
-Click on Run to deploy the app and test your object detection model.
+   - Download and install [Android Studio](https://developer.android.com/studio).
 
-vbnet
-Copy
-Edit
+   - Once installed, open Android Studio from your applications menu.
 
-Now you can simply copy and paste this into your `README.md` file! Let me know if you'd like any more adjustments.
+   - On the welcome screen of Android Studio, select **"Open an existing Android Studio project"**.
+
+   - Navigate to the root folder of the cloned repository and select it.
+
+4. **Build and Run the App**
+
+   - In Android Studio, click on the **Build** button to compile the project.
+
+   - After the build completes successfully, click on **Run** to deploy the app to your Android device or emulator.
