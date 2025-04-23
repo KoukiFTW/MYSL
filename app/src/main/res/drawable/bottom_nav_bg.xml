@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background Color -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/dark_blue"/> <!-- Background Color -->
+            <corners android:radius="8dp"/> <!-- Rounded Corners (Optional) -->
+        </shape>
+    </item>
+
+    <!-- Border/Outline -->
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp" android:color="@android:color/black"/> <!-- Black Border -->
+            <corners android:radius="8dp"/> <!-- Match Corners -->
+        </shape>
+    </item>
+
+</layer-list>
