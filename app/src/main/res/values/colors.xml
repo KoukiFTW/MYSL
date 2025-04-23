@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="bounding_box_color">#234567</color>
+    <color name="light_gray">#F5F5F5</color> <!-- Light gray background -->
+    <color name="primary">#FF6200EE</color>
+    <color name="nav_icon_tint">#FFFFFF</color>  <!-- White icons -->
+    <color name="nav_text_tint">#FFFFFF</color>  <!-- White text -->
+    <color name="dark_blue">#1E3C72</color>
 </resources>
