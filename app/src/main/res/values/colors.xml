@@ -5,7 +5,9 @@
     <color name="bounding_box_color">#234567</color>
     <color name="light_gray">#F5F5F5</color> <!-- Light gray background -->
     <color name="primary">#FF6200EE</color>
-    <color name="nav_icon_tint">#FFFFFF</color>  <!-- White icons -->
-    <color name="nav_text_tint">#FFFFFF</color>  <!-- White text -->
+    <color name="nav_icon_tint">@android:color/white</color>
+    <color name="nav_text_tint">@android:color/white</color>
     <color name="dark_blue">#1E3C72</color>
+    <color name="primary_500">#2196F3</color>
+    <color name="surface_container">#1AFFFFFF</color>
 </resources>

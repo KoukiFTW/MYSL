@@ -17,9 +17,9 @@
         android:theme="@style/Theme.YOLOv8TfLite"
         tools:targetApi="31">
 
-        <!-- ✅ Main Activity -->
+        <!-- Splash Screen Activity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,17 +27,20 @@
             </intent-filter>
         </activity>
 
-        <!--  Camera Activity -->
+        <!-- Main Activity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+        </activity>
+
         <activity
             android:name=".CameraActivity"
             android:exported="true"/>
 
-        <!--  Settings Activity  -->
         <activity
             android:name=".SettingsActivity"
             android:exported="false" />
 
-        <!-- Library Activity -->
         <activity
             android:name=".LibraryActivity"
             android:exported="false" />
