@@ -5,28 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_bg"
-    android:paddingHorizontal="16dp"
     tools:context=".LibraryActivity">
 
     <!-- Title -->
-    <TextView
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/tvLibraryTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Gesture Library"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-        android:textColor="#CCFFFFFF"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:title="Gesture Library"
+        app:titleTextColor="#CCFFFFFF"
+        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:elevation="0dp"/>
 
-    <!-- Scrollable Gesture List -->
+    <!-- Thin line divider -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/colorOutline"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tvLibraryTitle"/>
+
+    <!-- Description text -->
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Supported gestures list: Click to view the gesture"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        app:titleTextColor="#CCFFFFFF"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/divider"/>
+
+    <!-- Scrollable content (remainder unchanged) -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tvLibraryTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
@@ -40,28 +59,49 @@
                 android:id="@+id/layoutGesture1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#33FFFFFF"
-                app:cardBackgroundColor="#1AFFFFFF"
-                app:rippleColor="#33FFFFFF">
+                app:cardElevation="0dp"
+                app:strokeColor="?attr/colorOutline"
+                app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                app:rippleColor="?attr/colorPrimary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <!-- Title Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Gesture 1 - Number 0"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Number 1"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                            android:textColor="?attr/colorOnSurface" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageGesture1"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:visibility="gone"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/gesture1"
+                        android:contentDescription="Gesture 1 example"
+                        android:layout_marginTop="16dp"
+                        android:background="?attr/colorSurfaceContainer"/>
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -70,28 +110,49 @@
                 android:id="@+id/layoutGesture2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#33FFFFFF"
-                app:cardBackgroundColor="#1AFFFFFF"
-                app:rippleColor="#33FFFFFF">
+                app:cardElevation="0dp"
+                app:strokeColor="?attr/colorOutline"
+                app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                app:rippleColor="?attr/colorPrimary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <!-- Title Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Gesture 2 - Number 1"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Number 2"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                            android:textColor="?attr/colorOnSurface" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageGesture2"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:visibility="gone"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/gesture2"
+                        android:contentDescription="Gesture 2 example"
+                        android:layout_marginTop="16dp"
+                        android:background="?attr/colorSurfaceContainer"/>
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -100,290 +161,82 @@
                 android:id="@+id/layoutGesture3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#33FFFFFF"
-                app:cardBackgroundColor="#1AFFFFFF"
-                app:rippleColor="#33FFFFFF">
+                app:cardElevation="0dp"
+                app:strokeColor="?attr/colorOutline"
+                app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                app:rippleColor="?attr/colorPrimary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <!-- Title Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Gesture 3 - Number 2"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Number 3"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                            android:textColor="?attr/colorOnSurface" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageGesture3"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:visibility="gone"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/gesture3"
+                        android:contentDescription="Gesture 3 example"
+                        android:layout_marginTop="16dp"
+                        android:background="?attr/colorSurfaceContainer"/>
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Gesture 4 -->
+            <!-- Add more gesture -->
+
+            <!-- Learn More Card -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/layoutGesture4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#33FFFFFF"
-                app:cardBackgroundColor="#1AFFFFFF"
-                app:rippleColor="#33FFFFFF">
+                app:cardElevation="0dp"
+                app:strokeColor="?attr/colorOutline"
+                app:cardBackgroundColor="?attr/colorSurfaceVariant">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tvLearnMore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:text="Unfamiliar with Malaysian Sign Language? Click here to learn more"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:gravity="center"
                     android:padding="16dp"
-                    android:gravity="center_vertical">
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textStyle="italic"
+                    android:onClick="openLearnMoreLink"
+                    tools:ignore="UsingOnClickInXml"/>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Gesture 4 - Number 3"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
-            <!-- Gesture 5 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/layoutGesture5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#33FFFFFF"
-                app:cardBackgroundColor="#1AFFFFFF"
-                app:rippleColor="#33FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Gesture 5 - Number 4"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Gesture 6 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/layoutGesture6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#33FFFFFF"
-                app:cardBackgroundColor="#1AFFFFFF"
-                app:rippleColor="#33FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Gesture 6 - Number 5"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Gesture 7 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/layoutGesture7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#33FFFFFF"
-                app:cardBackgroundColor="#1AFFFFFF"
-                app:rippleColor="#33FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Gesture 7 - Number 6"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Gesture 8 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/layoutGesture8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#33FFFFFF"
-                app:cardBackgroundColor="#1AFFFFFF"
-                app:rippleColor="#33FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Gesture 8 - Number 7"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Gesture 9 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/layoutGesture9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#33FFFFFF"
-                app:cardBackgroundColor="#1AFFFFFF"
-                app:rippleColor="#33FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Gesture 9 - Number 8"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Gesture 10 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/layoutGesture10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#33FFFFFF"
-                app:cardBackgroundColor="#1AFFFFFF"
-                app:rippleColor="#33FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Gesture 10 - Number 9"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Gesture 11 -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/layoutGesture11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#33FFFFFF"
-                app:cardBackgroundColor="#1AFFFFFF"
-                app:rippleColor="#33FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Gesture 11 - Number 10"
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Learn More Link -->
-            <TextView
-                android:id="@+id/tvLearnMore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Click here to learn more about Malaysian Sign Language"
-                android:textColor="#80FFFFFF"
-                android:textSize="14sp"
-                android:padding="8dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:textStyle="italic"
-                android:onClick="openLearnMoreLink"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintVertical_bias="0.98"
-                android:layout_marginBottom="8dp"
-                tools:ignore="UsingOnClickInXml"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

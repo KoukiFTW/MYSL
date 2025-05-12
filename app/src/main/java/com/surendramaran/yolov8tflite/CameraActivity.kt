@@ -4,10 +4,19 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.*
+import androidx.camera.core.AspectRatio
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -23,12 +32,14 @@ class CameraActivity : AppCompatActivity(), Detector.DetectorListener {
     private var cameraProvider: ProcessCameraProvider? = null
     private lateinit var detector: Detector
     private lateinit var cameraExecutor: ExecutorService
+    private var infoPopup: PopupWindow? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Window and status bar setup
         window.statusBarColor = android.graphics.Color.TRANSPARENT
         window.decorView.systemUiVisibility = (
                 android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -38,23 +49,54 @@ class CameraActivity : AppCompatActivity(), Detector.DetectorListener {
         // Adjust padding for status bar
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
             val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
-            binding.inferenceTime.updatePadding(top = statusBarHeight + 5) // existing 5dp + status bar
+            binding.inferenceTime.updatePadding(top = statusBarHeight + 5)
             insets
         }
 
+        // Initialize detector
         detector = Detector(baseContext, Constants.MODEL_PATH, Constants.LABELS_PATH, this)
         detector.setup()
 
+        // Check camera permissions
         if (allPermissionsGranted()) {
             startCamera()
         } else {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
 
+        // Initialize camera executor
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-        binding.btnBack.setOnClickListener {
-            finish() // Go back to the main menu
+        // Setup button click listeners
+        binding.btnBack.setOnClickListener { finish() }
+        setupInfoButton()
+    }
+
+    private fun setupInfoButton() {
+        binding.btnInfo.setOnClickListener { v ->
+            // Inflate popup layout
+            val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val popupView = inflater.inflate(R.layout.info_popup, null)
+
+            // Create and configure popup window
+            infoPopup = PopupWindow(
+                popupView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true
+            ).apply {
+                setBackgroundDrawable(ColorDrawable())
+                elevation = 16f
+            }
+
+            // Show popup relative to info button
+            infoPopup?.showAsDropDown(v, 0, -v.height, Gravity.START)
+
+            // Dismiss popup when touched outside
+            popupView.setOnTouchListener { _, _ ->
+                infoPopup?.dismiss()
+                true
+            }
         }
     }
 
@@ -68,7 +110,6 @@ class CameraActivity : AppCompatActivity(), Detector.DetectorListener {
 
     private fun bindCameraUseCases() {
         val rotation = binding.viewFinder.display.rotation
-
         val cameraSelector = CameraSelector.Builder()
             .requireLensFacing(CameraSelector.LENS_FACING_BACK)
             .build()
@@ -93,7 +134,6 @@ class CameraActivity : AppCompatActivity(), Detector.DetectorListener {
             imageProxy.close()
 
             val matrix = Matrix().apply { postRotate(imageProxy.imageInfo.rotationDegrees.toFloat()) }
-
             val rotatedBitmap = Bitmap.createBitmap(
                 bitmapBuffer, 0, 0, bitmapBuffer.width, bitmapBuffer.height, matrix, true
             )
@@ -101,9 +141,14 @@ class CameraActivity : AppCompatActivity(), Detector.DetectorListener {
             detector.detect(rotatedBitmap)
         }
 
-        cameraProvider?.unbindAll()
         try {
-            val camera = cameraProvider?.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
+            cameraProvider?.unbindAll()
+            cameraProvider?.bindToLifecycle(
+                this,
+                cameraSelector,
+                preview,
+                imageAnalyzer
+            )
             preview.setSurfaceProvider(binding.viewFinder.surfaceProvider)
         } catch (exc: Exception) {
             Log.e(TAG, "Use case binding failed", exc)
@@ -115,17 +160,14 @@ class CameraActivity : AppCompatActivity(), Detector.DetectorListener {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-        detector.clear()
         cameraExecutor.shutdown()
+        cameraProvider?.unbindAll()
+        detector.clear()
+        infoPopup?.dismiss()
+        super.onDestroy()
     }
 
-    companion object {
-        private const val TAG = "Camera"
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-    }
-
+    // Detector callback implementations
     override fun onEmptyDetect() {
         binding.overlay.invalidate()
     }
@@ -138,5 +180,11 @@ class CameraActivity : AppCompatActivity(), Detector.DetectorListener {
                 invalidate()
             }
         }
+    }
+
+    companion object {
+        private const val TAG = "CameraActivity"
+        private const val REQUEST_CODE_PERMISSIONS = 10
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 }
